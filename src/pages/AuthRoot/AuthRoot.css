@@ -1,0 +1,11 @@
+/* Auth Root Layout */
+.auth-root {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(71.17deg, #FEAF00 19.35%, #F8D442 90.12%);
+  padding: 24px 16px;
+  box-sizing: border-box;
+}
+

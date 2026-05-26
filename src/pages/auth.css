@@ -1,0 +1,18 @@
+/* Shared auth page styles */
+.auth-switch {
+  margin-top: 18px;
+  text-align: center;
+  color: #000000;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.auth-switch__link {
+  color: #FEAF00;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-style: Medium;
+  font-size: 14px;
+}
+
