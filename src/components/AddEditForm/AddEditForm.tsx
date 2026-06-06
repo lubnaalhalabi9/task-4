@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react"
 import type { FormEvent } from "react"
 import type { AddEditFormProps, ItemCreated } from "../../interfaces" 
 import uploadIcon from "../../assets/images/upload-icon.png"
+import defaultProduct from "../../assets/images/defaultProduct.png"
 import "./AddEditForm.css"
 
 const Form = ({ title, inputs, submit, setData, setSubmit }: AddEditFormProps) => {
@@ -60,7 +61,15 @@ const Form = ({ title, inputs, submit, setData, setSubmit }: AddEditFormProps) =
 
                             {/* عرض الصورة المختارة أو القديمة، وإلا أيقونة الرفع */}
                             {preview
-                                ? <img className="aef__preview" src={preview} alt="preview" />
+                                ? <img
+                                    className="aef__preview"
+                                    src={preview}
+                                    alt="preview"
+                                    onError={(e) => {
+                                        e.currentTarget.src = defaultProduct
+                                        e.currentTarget.className = "aef__preview aef__preview--default"
+                                    }}
+                                  />
                                 : <img className="aef__upload-icon" src={uploadIcon} alt="upload" />
                             }
 

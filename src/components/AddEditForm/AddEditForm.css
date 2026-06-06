@@ -109,6 +109,14 @@
     pointer-events: none;
 }
 
+/* صورة افتراضية عند فشل تحميل الصورة الأصلية */
+.aef__preview--default {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    pointer-events: none;
+}
+
 /* Footer Save */
 .aef__footer {
     display: flex;
