@@ -4,7 +4,7 @@ import logo from "../../assets/images/logo.png"
 import uploadIcon from "../../assets/images/upload-icon.png"
 import "./LoginForm.css"
 
-const Form = ({ title, paragraph, inputs, submit, setData, footer }: FormProps1) => {
+const Form = ({ title, paragraph, inputs, submit, setData, footer, error, isLoading }: FormProps1) => {
     const data = useRef<Partial<SignInData & SignUpData>>({})
     const [preview, setPreview] = useState<string | null>(null)
 
@@ -148,7 +148,10 @@ const Form = ({ title, paragraph, inputs, submit, setData, footer }: FormProps1)
                     </div>
                 )
             })}
-            <button type="submit" className="form__submit">{submit}</button>
+            <button type="submit" className="form__submit" disabled={isLoading}>
+                {isLoading ? "Sending..." : submit}
+            </button>
+            {error && <p className="form__error">{error}</p>}
             {footer && <div className="form__footer">{footer}</div>}
         </form>
     )

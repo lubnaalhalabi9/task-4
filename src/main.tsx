@@ -48,7 +48,11 @@ const routes = createBrowserRouter([
       }
     ]
   }
-])
+],
+  {
+    basename: "/task-4",
+  }
+)
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

@@ -27,13 +27,12 @@ const AddProduct = () => {
 
     useEffect(() => {
         if (!submit) return
-        if (!data?.name) return
 
         const body = new FormData()
-        body.append("name", data.name ?? oldData?.name ?? "")
-        body.append("price", data.price ?? oldData?.price ?? "")
+        body.append("name", data?.name ?? oldData?.name ?? "")
+        body.append("price", data?.price ?? oldData?.price ?? "")
         body.append("_method", "PUT")
-        if (data.image) body.append("image", data.image)
+        if (data?.image) body.append("image", data.image)
 
         fetch(`https://dashboard-i552.onrender.com/api/items/${id}`, {
             method: "POST",

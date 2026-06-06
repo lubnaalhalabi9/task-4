@@ -22,6 +22,8 @@ export interface FormProps1 {
     submit : string;
     setData : React.Dispatch<React.SetStateAction<SignInData | SignUpData>>;
     footer?: React.ReactNode;
+    error?: string;
+    isLoading?: boolean;
 }
 
 export interface Input {

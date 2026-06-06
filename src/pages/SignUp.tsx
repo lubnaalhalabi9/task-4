@@ -1,11 +1,26 @@
 import Form from "../components/LoginForm/LoginForm"
 import { useNavigate, Link } from "react-router-dom"
 import type { SignInData, SignUpData } from "../interfaces"
+import { useState } from "react"
 
 const SignUp = () => {
     const navigate = useNavigate()
+    const [error, setError] = useState<string>("")
+    const [isLoading, setIsLoading] = useState<boolean>(false)
 
     const handleSignUp = (formData: SignUpData) => {
+        setError("")
+
+        if (!formData.first_name || !formData.last_name || !formData.email || !formData.password || !formData.password_confirmation) {
+            setError("Please fill in all fields.")
+            return
+        }
+
+        if (formData.password !== formData.password_confirmation) {
+            setError("Passwords do not match.")
+            return
+        }
+
         const body = new FormData()
         body.append("email", formData.email)
         body.append("password", formData.password)
@@ -18,6 +33,7 @@ const SignUp = () => {
             body.append("profile_image", formData.profile_image)
         }
 
+        setIsLoading(true)
         fetch("https://dashboard-i552.onrender.com/api/register", {
             headers: { "Accept": "application/json" },
             method: "POST",
@@ -25,13 +41,15 @@ const SignUp = () => {
         })
         .then(res => res.json())
         .then(res => {
-            console.log("API Response:", res)
             if (res.data?.token) {
                 localStorage.setItem("token", res.data.token)
                 navigate("/dashboard")
+            } else {
+                setError(res.message || "Registration failed. Please try again.")
             }
         })
-        .catch(err => console.log(err))
+        .catch(() => setError("Something went wrong. Please try again."))
+        .finally(() => setIsLoading(false))
     }
 
     const footer = (
@@ -86,6 +104,8 @@ const SignUp = () => {
                 ]}
                 submit="SIGN UP"
                 setData={handleSignUp as React.Dispatch<React.SetStateAction<SignInData | SignUpData>>}
+                error={error}
+                isLoading={isLoading}
                 footer={footer}
             />
         </div>
