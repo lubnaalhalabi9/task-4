@@ -37,7 +37,7 @@ const AddProduct = () => {
                 title="Add New Item"
                 inputs={[
                     { name: "name",  type: "text",  placeholder: "Enter the product name" ,  label: "Name"},
-                    { name: "price", type: "text",  placeholder: "Enter the product price",  label: "Price" },
+                    { name: "price", type: "number",  placeholder: "Enter the product price",  label: "Price" },
                     { name: "image", type: "file",  placeholder: "" ,  label: "Image"},
                 ]}
                 submit="Save"

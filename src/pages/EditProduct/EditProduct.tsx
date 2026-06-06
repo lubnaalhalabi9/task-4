@@ -60,7 +60,7 @@ const AddProduct = () => {
                 title="EDIT ITEM"
                 inputs={[
                     { name: "name",  type: "text", placeholder: "Enter the product name",  label: "Name" , value: oldData?.name },
-                    { name: "price", type: "text", placeholder: "Enter the product price", label: "Price" , value: oldData?.price },
+                    { name: "price", type: "number", placeholder: "Enter the product price", label: "Price" , value: oldData?.price },
                     { name: "image", type: "file", placeholder: "", label: "Image" , value: oldData?.image_url },
                 ]}
                 submit="Save"

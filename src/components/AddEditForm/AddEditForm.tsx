@@ -45,6 +45,7 @@ const Form = ({ title, inputs, submit, setData, setSubmit }: AddEditFormProps) =
                                 onChange={(e) =>
                                     data.current = { ...data.current, [input.name]: e.target.value }
                                 }
+                                {...(input.type === "number" && { min: "0", step: "any" })}
                                 required
                             />
                         </div>
