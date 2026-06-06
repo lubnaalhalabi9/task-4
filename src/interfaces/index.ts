@@ -59,8 +59,8 @@ export interface AddEditFormProps {
     title: string
     submit : string
     inputs: Array<Input>
-    setData : React.Dispatch<React.SetStateAction<SignInData | SignUpData | ItemCreated >>
-    setSubmit : React.Dispatch<React.SetStateAction<boolean>>
+    setData : React.Dispatch<React.SetStateAction<ItemCreated | undefined>>
+    setSubmit? : React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export interface SidebarProps {

@@ -1,16 +1,16 @@
 import { useEffect, useRef, useState } from "react"
 import type { FormEvent } from "react"
-import type { AddEditFormProps, SignInData, SignUpData, ItemCreated } from "../../interfaces"
+import type { AddEditFormProps, ItemCreated } from "../../interfaces" 
 import uploadIcon from "../../assets/images/upload-icon.png"
 import "./AddEditForm.css"
 
 const Form = ({ title, inputs, submit, setData, setSubmit }: AddEditFormProps) => {
-    const data = useRef<SignInData | SignUpData | ItemCreated>({} as SignInData)
+    const data = useRef<ItemCreated>({} as ItemCreated)
 
     const fileInput  = inputs.find(i => i.type === "file")
     const textInputs = inputs.filter(i => i.type !== "file")
 
-    // يبدأ بالصورة القديمة إن وُجدت، وإلا undefined
+    // يبدأ بالصورة القديمة إن وجدت، وإلا undefined
     const [preview, setPreview] = useState<string | undefined>(fileInput?.value)
 
     useEffect(() => {
@@ -23,8 +23,8 @@ const Form = ({ title, inputs, submit, setData, setSubmit }: AddEditFormProps) =
  
     const sendData = (event: FormEvent) => {
         event.preventDefault()
-        setData(data.current)
-        setSubmit(true)
+        setData(data.current as ItemCreated)
+        setSubmit?.(true)
     }
 
     return (
