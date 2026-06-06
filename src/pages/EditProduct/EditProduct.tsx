@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 import type { Item, ItemCreated } from "../../interfaces"
-import type { SignInData, SignUpData } from "../../interfaces"
 import { useNavigate, useParams } from "react-router-dom"
 import AddEditForm from "../../components/AddEditForm/AddEditForm"
 import BackButton from "../../components/BackButton/BackButton"
@@ -65,7 +64,7 @@ const AddProduct = () => {
                     { name: "image", type: "file", placeholder: "", label: "Image" , value: oldData?.image_url },
                 ]}
                 submit="Save"
-                setData={setData as React.Dispatch<React.SetStateAction<SignInData | SignUpData | ItemCreated>>}
+                setData={setData}
                 setSubmit={setSubmit}
             />}
         </div>
