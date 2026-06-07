@@ -4,6 +4,7 @@ import "./ReadProducts.css"
 import type { Item } from "../../interfaces"
 import searchIcon from "../../assets/images/searchIcon.png"
 import defaultProduct from "../../assets/images/defaultProduct.png"
+import Toast from "../../components/Toast/Toast"
 
 const ReadProducts = () => {
   const navigate = useNavigate()
@@ -14,6 +15,7 @@ const ReadProducts = () => {
   const [selectedItemId, setSelectedItemId] = useState<number | null>(null)
   const [search, setSearch] = useState<string>("")
   const [page, setPage] = useState(1)
+  const [toast, setToast] = useState<{ message: string; type: "success" | "error" } | null>(null)
   const itemsPerPage = 8
 
   const filtered = data.filter(item =>
@@ -71,8 +73,12 @@ const ReadProducts = () => {
         setRefresh(!refresh)
         setShowModal(false)
         setSelectedItemId(null)
+        setToast({ message: "Product deleted successfully!", type: "success" })
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        console.log(err)
+        setToast({ message: "Failed to delete product. Try again.", type: "error" })
+      })
     }
   }
 
@@ -221,6 +227,14 @@ const ReadProducts = () => {
             </div>
           </div>
         </div>
+      )}
+
+      {toast && (
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          onClose={() => setToast(null)}
+        />
       )}
     </div>
   )

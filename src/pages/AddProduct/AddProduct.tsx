@@ -3,9 +3,11 @@ import type { ItemCreated } from "../../interfaces"
 import { useNavigate } from "react-router-dom"
 import AddEditForm from "../../components/AddEditForm/AddEditForm"
 import BackButton from "../../components/BackButton/BackButton"
+import Toast from "../../components/Toast/Toast"
 
 const AddProduct = () => {
     const [data, setData] = useState<ItemCreated>()
+    const [toast, setToast] = useState<{ message: string; type: "success" | "error" } | null>(null)
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -25,9 +27,14 @@ const AddProduct = () => {
             body
         })
             .then(res => res.json())
-            .then((res) =>{ console.log(res)
-                navigate("/dashboard")})
-            .catch(err => console.log(err))
+            .then(() => {
+                setToast({ message: "Product added successfully!", type: "success" })
+                setTimeout(() => navigate("/dashboard"), 1500)
+            })
+            .catch(err => {
+                console.log(err)
+                setToast({ message: "Failed to add product. Try again.", type: "error" })
+            })
     }, [data])
 
     return (
@@ -43,6 +50,13 @@ const AddProduct = () => {
                 submit="Save"
                 setData={setData}
             />
+            {toast && (
+                <Toast
+                    message={toast.message}
+                    type={toast.type}
+                    onClose={() => setToast(null)}
+                />
+            )}
         </div>
     )
 }

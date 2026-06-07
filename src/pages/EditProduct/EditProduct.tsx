@@ -3,12 +3,14 @@ import type { Item, ItemCreated } from "../../interfaces"
 import { useNavigate, useParams } from "react-router-dom"
 import AddEditForm from "../../components/AddEditForm/AddEditForm"
 import BackButton from "../../components/BackButton/BackButton"
+import Toast from "../../components/Toast/Toast"
 import "./EditProduct.css"
 
 const AddProduct = () => {
     const [data, setData] = useState<ItemCreated | undefined>()
     const [oldData, setOldData] = useState<Item>()
     const [submit, setSubmit] = useState<boolean>(false)
+    const [toast, setToast] = useState<{ message: string; type: "success" | "error" } | null>(null)
     const navigate = useNavigate()
 
     const {id} = useParams()
@@ -45,11 +47,13 @@ const AddProduct = () => {
             .then(res => {
                 console.log(res)
                 setSubmit(false)
-                navigate("/dashboard")
+                setToast({ message: "Product updated successfully!", type: "success" })
+                setTimeout(() => navigate("/dashboard"), 1500)
             })
             .catch(err => {
                 console.log(err)
                 setSubmit(false)
+                setToast({ message: "Failed to update product. Try again.", type: "error" })
             })
     }, [submit, data])
 
@@ -67,6 +71,13 @@ const AddProduct = () => {
                 setData={setData}
                 setSubmit={setSubmit}
             />}
+            {toast && (
+                <Toast
+                    message={toast.message}
+                    type={toast.type}
+                    onClose={() => setToast(null)}
+                />
+            )}
         </div>
     )
 }
